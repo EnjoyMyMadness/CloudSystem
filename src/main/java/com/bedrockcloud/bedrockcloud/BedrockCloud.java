@@ -33,7 +33,7 @@ import java.util.HashMap;
 import java.util.Objects;
 import java.util.Timer;
 
-@VersionInfo(name = "BedrockCloud", version = "2.0.0", developers = { "xxFLORII", "r3pt1s", "BauboLPYT" }, identifier = "@Stable")
+@VersionInfo(name = "BedrockCloud", version = "2.0.0", developers = { "BedrockCloud" }, identifier = "@Stable")
 public class BedrockCloud
 {
     public static TemplateProvider templateProvider;
