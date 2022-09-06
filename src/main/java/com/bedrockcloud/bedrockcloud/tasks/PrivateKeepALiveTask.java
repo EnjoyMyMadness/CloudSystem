@@ -2,6 +2,7 @@ package com.bedrockcloud.bedrockcloud.tasks;
 
 import com.bedrockcloud.bedrockcloud.api.GroupAPI;
 import com.bedrockcloud.bedrockcloud.api.MessageAPI;
+import com.bedrockcloud.bedrockcloud.server.privategameserver.PrivateGameServer;
 import com.bedrockcloud.bedrockcloud.server.proxy.ProxyServer;
 import com.bedrockcloud.bedrockcloud.serverQuery.api.Protocol;
 import com.bedrockcloud.bedrockcloud.serverQuery.api.QueryException;
@@ -29,7 +30,7 @@ public class PrivateKeepALiveTask extends Thread {
                 if (servername == null) {
                     return;
                 }
-                final GameServer gameServer = BedrockCloud.getGameServerProvider().getGameServer(servername);
+                final PrivateGameServer gameServer = BedrockCloud.getPrivateGameServerProvider().getGameServer(servername);
                 if (gameServer == null) {
                     return;
                 }

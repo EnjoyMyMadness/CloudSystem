@@ -7,7 +7,6 @@ import com.bedrockcloud.bedrockcloud.config.Config;
 import com.bedrockcloud.bedrockcloud.server.privategameserver.PrivateGameServerProvider;
 import com.bedrockcloud.bedrockcloud.tasks.KeepALiveTask;
 import com.bedrockcloud.bedrockcloud.tasks.PrivateKeepALiveTask;
-import com.bedrockcloud.bedrockcloud.tasks.ProxyKeepALiveTask;
 import com.bedrockcloud.bedrockcloud.tasks.RestartAllTask;
 import com.bedrockcloud.bedrockcloud.templates.Template;
 import com.bedrockcloud.bedrockcloud.files.json.json;
@@ -22,11 +21,9 @@ import com.bedrockcloud.bedrockcloud.server.proxy.ProxyServerProvider;
 import com.bedrockcloud.bedrockcloud.server.gameserver.GameServerProvider;
 import com.bedrockcloud.bedrockcloud.templates.TemplateProvider;
 import com.bedrockcloud.bedrockcloud.console.Logger;
-import org.checkerframework.framework.qual.IgnoreInWholeProgramInference;
 
 import java.io.*;
 import java.net.URISyntaxException;
-import java.net.URLDecoder;
 import java.util.Arrays;
 import java.net.Socket;
 import java.lang.management.ManagementFactory;
@@ -80,7 +77,6 @@ public class BedrockCloud
 
         (new KeepALiveTask()).start();
         (new PrivateKeepALiveTask()).start();
-        (new ProxyKeepALiveTask()).start();
 
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             BedrockCloud.setRunning(false);

@@ -24,7 +24,6 @@ com\bedrockcloud\bedrockcloud\serverQuery\api\Protocol.class
 com\bedrockcloud\bedrockcloud\player\CloudPlayerProvider.class
 com\bedrockcloud\bedrockcloud\network\packets\GameServerInfoResponsePacket.class
 com\bedrockcloud\bedrockcloud\serverQuery\internal\QueryStatusBase.class
-com\bedrockcloud\bedrockcloud\tasks\ProxyKeepALiveTask.class
 com\bedrockcloud\bedrockcloud\VersionInfo.class
 com\bedrockcloud\bedrockcloud\network\packets\GameServerInfoRequestPacket.class
 com\bedrockcloud\bedrockcloud\api\MessageAPI.class
