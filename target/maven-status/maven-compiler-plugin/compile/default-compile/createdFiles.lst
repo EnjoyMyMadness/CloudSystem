@@ -24,6 +24,7 @@ com\bedrockcloud\bedrockcloud\serverQuery\api\Protocol.class
 com\bedrockcloud\bedrockcloud\player\CloudPlayerProvider.class
 com\bedrockcloud\bedrockcloud\network\packets\GameServerInfoResponsePacket.class
 com\bedrockcloud\bedrockcloud\serverQuery\internal\QueryStatusBase.class
+com\bedrockcloud\bedrockcloud\tasks\ProxyKeepALiveTask.class
 com\bedrockcloud\bedrockcloud\VersionInfo.class
 com\bedrockcloud\bedrockcloud\network\packets\GameServerInfoRequestPacket.class
 com\bedrockcloud\bedrockcloud\api\MessageAPI.class
@@ -70,6 +71,7 @@ com\bedrockcloud\bedrockcloud\serverQuery\api\Status$Mods.class
 com\bedrockcloud\bedrockcloud\network\packets\CheckCloudPlayerRequestPacket.class
 com\bedrockcloud\bedrockcloud\network\packets\StopServerPacket.class
 com\bedrockcloud\bedrockcloud\network\packets\CloudNotifyMessagePacket.class
+com\bedrockcloud\bedrockcloud\tasks\PrivateKeepALiveTask.class
 com\bedrockcloud\bedrockcloud\files\Startfiles.class
 com\bedrockcloud\bedrockcloud\network\packets\SendToHubPacket.class
 com\bedrockcloud\bedrockcloud\network\packets\StopGroupPacket.class

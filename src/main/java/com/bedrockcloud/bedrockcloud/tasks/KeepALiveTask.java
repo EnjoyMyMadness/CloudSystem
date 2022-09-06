@@ -1,6 +1,5 @@
 package com.bedrockcloud.bedrockcloud.tasks;
 
-import com.bedrockcloud.bedrockcloud.server.port.PortValidator;
 import com.bedrockcloud.bedrockcloud.api.GroupAPI;
 import com.bedrockcloud.bedrockcloud.api.MessageAPI;
 import com.bedrockcloud.bedrockcloud.server.proxy.ProxyServer;
@@ -13,12 +12,14 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import com.bedrockcloud.bedrockcloud.server.gameserver.GameServer;
 import java.io.File;
-import java.util.TimerTask;
 
 import com.bedrockcloud.bedrockcloud.network.packets.KeepALivePacket;
 import com.bedrockcloud.bedrockcloud.BedrockCloud;
 
-public class KeepALiveTask extends TimerTask {
+/*
+ * KeepALiveTask to check the status of a service
+ */
+public class KeepALiveTask extends Thread {
     @Override
     public void run() {
         final Iterator<String> var1 = BedrockCloud.getGameServerProvider().gameServerMap.keySet().iterator();
@@ -50,8 +51,7 @@ public class KeepALiveTask extends TimerTask {
                         gameServer.pushPacket(packet);
                     } else {
                         if (BedrockCloud.getGameServerProvider().existServer(servername)) {
-                            if (gameServer.getAliveChecks() >= 5) {
-                                System.out.println("Server disconnected by keepalivetask");
+                            if (gameServer.getAliveChecks() >= 10) {
                                 gameServer.setAliveChecks(0);
 
                                 String notifyMessage = MessageAPI.timedOut.replace("%service", servername);
@@ -98,7 +98,7 @@ public class KeepALiveTask extends TimerTask {
                             BedrockCloud.getLogger().warning(var1.next() + " GameServer not exists!");
                         }
                     }
-                    if (gameServer.getAliveChecks() < 5) {
+                    if (gameServer.getAliveChecks() < 10) {
                         gameServer.setAliveChecks(gameServer.getAliveChecks() + 1);
                     }
                 }

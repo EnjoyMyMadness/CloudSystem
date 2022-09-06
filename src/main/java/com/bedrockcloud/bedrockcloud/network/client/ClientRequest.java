@@ -38,13 +38,12 @@ public class ClientRequest extends Thread {
                 }
                 try {
                     BedrockCloud.getPacketHandler().handleCloudPacket(BedrockCloud.getPacketHandler().handleJsonObject(BedrockCloud.getPacketHandler().getPacketNameByRequest(line), line), this);
-                    this.dataOutputStream.flush();
-                    this.dataInputStream.reset();
-                } catch (NullPointerException ignored){
-                    this.dataOutputStream.flush();
-                    this.dataInputStream.reset();
+                } catch (NullPointerException ignored) {
                 }
-            } catch (NullPointerException | IOException ignored) {}
+            } catch (NullPointerException | IOException ignored) {
+            }
         }
+        BedrockCloud.getLogger().warning("Server connection failed, stopping thread.");
+        this.stop();
     }
 }

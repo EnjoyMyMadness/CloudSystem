@@ -6,6 +6,8 @@ import com.bedrockcloud.bedrockcloud.player.CloudPlayerProvider;
 import com.bedrockcloud.bedrockcloud.config.Config;
 import com.bedrockcloud.bedrockcloud.server.privategameserver.PrivateGameServerProvider;
 import com.bedrockcloud.bedrockcloud.tasks.KeepALiveTask;
+import com.bedrockcloud.bedrockcloud.tasks.PrivateKeepALiveTask;
+import com.bedrockcloud.bedrockcloud.tasks.ProxyKeepALiveTask;
 import com.bedrockcloud.bedrockcloud.tasks.RestartAllTask;
 import com.bedrockcloud.bedrockcloud.templates.Template;
 import com.bedrockcloud.bedrockcloud.files.json.json;
@@ -75,7 +77,10 @@ public class BedrockCloud
         if (getConfig().getBoolean("auto-restart-cloud", false)) {
             ttime.schedule(new RestartAllTask(), 1000L, 1000L);
         }
-        ttime.schedule(new KeepALiveTask(), 1000L, 1000L);
+
+        (new KeepALiveTask()).start();
+        (new PrivateKeepALiveTask()).start();
+        (new ProxyKeepALiveTask()).start();
 
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             BedrockCloud.setRunning(false);
@@ -96,7 +101,7 @@ public class BedrockCloud
 
                     Thread.sleep(200L);
                     builder.command("/bin/sh", "-c", "killall -9 php").start();
-                    builder.command("/bin/sh", "-c", "killall -9 java").start();
+                    builder.command("/bin/sh", "-c", "killall -9 java").start(); //INFO: This is needed to fix that not all services were stopped
                 } catch (InterruptedException | IOException e) {
                     BedrockCloud.getLogger().exception(e);
                 }

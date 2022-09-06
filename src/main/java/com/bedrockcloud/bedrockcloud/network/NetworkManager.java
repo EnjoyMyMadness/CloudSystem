@@ -4,10 +4,10 @@ import com.bedrockcloud.bedrockcloud.BedrockCloud;
 import com.bedrockcloud.bedrockcloud.network.client.ClientRequest;
 
 import java.io.IOException;
+import java.net.*;
 import java.util.HashMap;
-import java.net.Socket;
 import java.util.Map;
-import java.net.ServerSocket;
+
 import com.bedrockcloud.bedrockcloud.console.Loggable;
 
 public class NetworkManager implements Loggable
@@ -31,9 +31,14 @@ public class NetworkManager implements Loggable
         while (true) {
             try {
                 final Socket socket = this.serverSocket.accept();
-                if (socket.isConnected()) {
+                try {
+                    socket.setTcpNoDelay(true);
+                    socket.setKeepAlive(true);
+                } catch (SocketException e){
+                    BedrockCloud.getLogger().exception(e);
+                }
+                if (socket.isConnected() && !socket.isClosed()) {
                     ClientRequest request = new ClientRequest(socket);
-                    request.setDaemon(true);
                     request.start();
                 }
             } catch (IOException e) {
