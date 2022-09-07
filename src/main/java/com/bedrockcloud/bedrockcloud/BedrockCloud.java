@@ -75,8 +75,8 @@ public class BedrockCloud
             ttime.schedule(new RestartAllTask(), 1000L, 1000L);
         }
 
-        (new KeepALiveTask()).start();
-        (new PrivateKeepALiveTask()).start();
+        ttime.schedule(new KeepALiveTask(), 1000L, 1000L);
+        ttime.schedule(new PrivateKeepALiveTask(), 1000L, 1000L);
 
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             BedrockCloud.setRunning(false);

@@ -12,6 +12,7 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import com.bedrockcloud.bedrockcloud.server.gameserver.GameServer;
 import java.io.File;
+import java.util.TimerTask;
 
 import com.bedrockcloud.bedrockcloud.network.packets.KeepALivePacket;
 import com.bedrockcloud.bedrockcloud.BedrockCloud;
@@ -19,12 +20,14 @@ import com.bedrockcloud.bedrockcloud.BedrockCloud;
 /*
  * KeepALiveTask to check the status of a service
  */
-public class KeepALiveTask extends Thread {
+public class KeepALiveTask extends TimerTask {
     @Override
     public void run() {
         final Iterator<String> var1 = BedrockCloud.getGameServerProvider().gameServerMap.keySet().iterator();
         try {
-            while (var1.hasNext()) {
+            while (true) {
+                if (!var1.hasNext()) return;
+
                 final String servername = var1.next();
                 if (servername == null) {
                     return;
