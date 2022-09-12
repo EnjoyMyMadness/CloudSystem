@@ -52,6 +52,10 @@ public class PrivateGameServer
     public String getServerName() {
         return this.serverName;
     }
+
+    public String getServerOwner(){
+        return this.serverOwner;
+    }
     
     public int getServerPort() {
         return this.serverPort;
