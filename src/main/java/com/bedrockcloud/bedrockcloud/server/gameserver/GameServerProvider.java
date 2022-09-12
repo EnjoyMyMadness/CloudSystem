@@ -120,6 +120,7 @@ public class GameServerProvider
             prop.set("cloud-port", String.valueOf(BedrockCloud.getConfig().getDouble("port")));
             prop.set("cloud-password", BedrockCloud.getConfig().getString("password"));
             prop.set("cloud-path", BedrockCloud.getCloudPath());
+            prop.set("is-private", false);
             prop.save();
         } catch (Throwable ignored) {}
     }
