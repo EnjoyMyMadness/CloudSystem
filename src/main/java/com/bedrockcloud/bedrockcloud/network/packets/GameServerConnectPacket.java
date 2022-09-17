@@ -57,6 +57,13 @@ public class GameServerConnectPacket extends DataPacket
             BedrockCloud.sendNotifyCloud(notifyMessage);
 
             gameServer.getTemplate().addServer(gameServer.getTemplate(), serverName);
+
+            PlayerMovePacket pk = new PlayerMovePacket();
+            pk.playerName = gameServer.getServerOwner();
+            pk.toServer = pk.getServerName();
+            for (final ProxyServer proxy : BedrockCloud.getProxyServerProvider().getProxyServerMap().values()) {
+                proxy.pushPacket(pk);
+            }
         }
     }
 }
