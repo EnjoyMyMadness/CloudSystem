@@ -55,12 +55,13 @@ public class PacketHandler implements Loggable
             final JSONObject jsonObject = (JSONObject)obj;
             return jsonObject;
         }
+
         this.getLogger().warning("§eFailed to handle packet: " + packetName);
         return new JSONObject();
     }
 
     public void handleCloudPacket(final JSONObject jsonObject, final ClientRequest clientRequest) {
-        if (clientRequest.getSocket().getInetAddress().toString().equals("/127.0.0.1")) {
+        if (this.isLocalHost(clientRequest)) {
             if (jsonObject.get("packetName") != null) {
                 final String packetName = jsonObject.get("packetName").toString();
                 final Class c = this.getPacketByName(packetName);
@@ -74,5 +75,9 @@ public class PacketHandler implements Loggable
         } else {
             this.getLogger().warning("§cAuthorization failed. Client infomation:" + clientRequest.getSocket().getLocalAddress() + ":" + clientRequest.getSocket().getPort());
         }
+    }
+
+    public boolean isLocalHost(ClientRequest request){
+        return request.getSocket().getInetAddress().isLoopbackAddress();
     }
 }

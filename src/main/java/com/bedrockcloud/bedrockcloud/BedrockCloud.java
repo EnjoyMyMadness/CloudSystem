@@ -63,6 +63,8 @@ public class BedrockCloud
     public BedrockCloud() {
         running = true;
 
+        System.setProperty("java.net.preferIPv4Stack" , "true");
+
         this.initProvider();
         this.registerCommands();
         getLogger().info("This cloud was developed by §b" + Arrays.toString(Objects.requireNonNull(getVersion()).developers()).replace("[", "").replace("]", ""));
