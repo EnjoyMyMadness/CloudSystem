@@ -20,7 +20,7 @@ public class NodeServerConnectPacket extends DataPacket implements Loggable
     
     @Override
     public void handle(final JSONObject jsonObject, final ClientRequest clientRequest) {
-        this.getLogger().info("§4StimoNode-1 has connected to the cloud");
+        this.getLogger().info("§4BedrockCloud node has connected to the cloud");
         try {
             final Integer socketPort = (Integer) jsonObject.get("socketPort");
             final Socket s = new Socket("127.0.0.1", socketPort);
