@@ -65,6 +65,12 @@ public class BedrockCloud
 
         System.setProperty("java.net.preferIPv4Stack" , "true");
 
+        int javaVersion = getJavaVersion();
+        if (javaVersion < 17) {
+            getLogger().error("Using unsupported Java version! Minimum supported version is Java 17, found Java " + javaVersion);
+            return;
+        }
+
         this.initProvider();
         this.registerCommands();
         getLogger().info("This cloud was developed by §b" + Arrays.toString(Objects.requireNonNull(getVersion()).developers()).replace("[", "").replace("]", ""));
@@ -308,5 +314,18 @@ public class BedrockCloud
         BedrockCloud.getLogger().command("Free Memory   : " + Runtime.getRuntime().freeMemory() + " bytes");
         BedrockCloud.getLogger().command("Total Memory  : " + Runtime.getRuntime().totalMemory() + " bytes");
         BedrockCloud.getLogger().command("Max Memory    : " + Runtime.getRuntime().maxMemory() + " bytes");
+    }
+
+    private static int getJavaVersion() {
+        String version = System.getProperty("java.version");
+        if (version.startsWith("1.")) {
+            return Integer.parseInt(version.substring(2, 3));
+        }
+
+        int index = version.indexOf(".");
+        if (index != -1) {
+            version = version.substring(0, index);
+        }
+        return Integer.parseInt(version);
     }
 }

@@ -20,7 +20,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>com.bedrockcloud.bedrockcloud.ClassNotFound</mainClass>
+              <mainClass>com.bedrockcloud.bedrockcloud.CloudStarter</mainClass>
             </manifest>
           </archive>
         </configuration>

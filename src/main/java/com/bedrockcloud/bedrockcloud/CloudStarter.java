@@ -2,7 +2,7 @@ package com.bedrockcloud.bedrockcloud;
 
 import com.bedrockcloud.bedrockcloud.files.Startfiles;
 
-public class ClassNotFound {
+public class CloudStarter {
     public static void main(String args[]) {
         try {
             Class.forName("com.bedrockcloud.bedrockcloud.BedrockCloud");
