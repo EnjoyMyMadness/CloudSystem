@@ -22,13 +22,14 @@ jobs:
         with:
           name: bedrockcloud
           path: target/BedrockCloud.jar  
-      - name: Upload pre-release
+      - name: Upload release
         if: github.ref == 'refs/heads/master'
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "latest"
-          prerelease: true
-          title: "Snapshot Build"
+          prerelease: false
+          title: "BedrockCloud release: $version"
+          tag: "v$semver"
           files: |
             target/BedrockCloud.jar
