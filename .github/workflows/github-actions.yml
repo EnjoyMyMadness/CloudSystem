@@ -29,6 +29,7 @@ jobs:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "latest"
           prerelease: false
+          automatic_releases_tag: "latest"
           title: "BedrockCloud release"
           tag: "latest"
           files: |
