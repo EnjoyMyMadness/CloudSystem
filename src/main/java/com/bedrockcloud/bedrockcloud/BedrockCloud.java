@@ -88,10 +88,11 @@ public class BedrockCloud
 
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             BedrockCloud.setRunning(false);
-            try {
-                if (BedrockCloud.getSocket() != null && !BedrockCloud.getSocket().isClosed()) BedrockCloud.getSocket().close();
-            } catch (IOException ignored) {}
             do {
+                try {
+                    if (BedrockCloud.getSocket() != null && !BedrockCloud.getSocket().isClosed()) BedrockCloud.getSocket().close();
+                } catch (IOException ignored) {}
+
                 final ProcessBuilder builder = new ProcessBuilder();
                 try {
 
