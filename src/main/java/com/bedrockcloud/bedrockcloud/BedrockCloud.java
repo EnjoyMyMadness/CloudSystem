@@ -108,10 +108,9 @@ public class BedrockCloud
                         proxyServer.stopServer();
                     }
 
-                    Thread.sleep(200L);
                     builder.command("/bin/sh", "-c", "killall -9 php").start();
                     builder.command("/bin/sh", "-c", "killall -9 java").start(); //INFO: This is needed to fix that not all services were stopped
-                } catch (InterruptedException | IOException e) {
+                } catch (IOException e) {
                     BedrockCloud.getLogger().exception(e);
                 }
             } while (!BedrockCloud.isRunning());
@@ -175,31 +174,6 @@ public class BedrockCloud
         getPacketHandler().registerPacket("SendToHubPacket", SendToHubPacket.class);
         getPacketHandler().registerPacket("ListTemplatesRequestPacket", ListTemplatesRequestPacket.class);
         getPacketHandler().registerPacket("ListTemplatesResponsePacket", ListTemplatesResponsePacket.class);
-    }
-    
-    public static void pushPacket(final DataPacket cloudPacket) {
-        try {
-            if (BedrockCloud.socket.isClosed()) {
-                getLogger().error("CloudPacket cannot be push because socket is closed :/");
-                return;
-            }
-            if (BedrockCloud.socket.isClosed()) {
-                getLogger().error("CloudPacket cannot be push because socket is closed :/");
-                return;
-            }
-            try {
-                final PrintWriter writer = new PrintWriter(BedrockCloud.socket.getOutputStream());
-                writer.println(cloudPacket.encode());
-                writer.flush();
-                System.out.println("Send: " + writer);
-            }
-            catch (IOException e) {
-                getLogger().exception(e);
-            }
-        }
-        catch (NullPointerException e2) {
-            getLogger().exception(e2);
-        }
     }
     
     private void startAllProxies() {
