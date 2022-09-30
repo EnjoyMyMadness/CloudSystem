@@ -41,9 +41,16 @@ public class Logger
     }
     
     public static String getStackTrace(final Throwable t) {
-        final StringWriter sw = new StringWriter();
-        t.printStackTrace(new PrintWriter(sw));
-        return sw.toString();
+
+        if (t == null) return "§cCan't get stacktrace.";
+
+        try {
+            final StringWriter sw = new StringWriter();
+            t.printStackTrace(new PrintWriter(sw));
+            return sw.toString();
+        } catch (NullPointerException ignored){
+            return "§cCan't get stacktrace.";
+        }
     }
     
     public void log(final String prefix, final String message) {
