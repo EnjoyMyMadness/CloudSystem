@@ -25,7 +25,7 @@ public class GameServerDisconnectPacket extends DataPacket
     @Override
     public void handle(final JSONObject jsonObject, final ClientRequest clientRequest) {
         final String serverName = jsonObject.get("serverName").toString();
-        final boolean isPrivate = (boolean) jsonObject.get("isPrivate");
+        final boolean isPrivate = Boolean.parseBoolean(jsonObject.get("isPrivate").toString());
 
         if (!isPrivate) {
             final GameServer gameServer = BedrockCloud.getGameServerProvider().getGameServer(serverName);

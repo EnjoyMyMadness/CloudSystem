@@ -16,7 +16,7 @@ public class GameServerConnectPacket extends DataPacket
         final String serverName = jsonObject.get("serverName").toString();
         final String serverPort = jsonObject.get("serverPort").toString();
         final String serverPid = jsonObject.get("serverPid").toString();
-        final boolean isPrivate = (boolean)jsonObject.get("isPrivate");
+        final boolean isPrivate = Boolean.parseBoolean(jsonObject.get("isPrivate").toString());
         if (!isPrivate) {
             final GameServer gameServer = BedrockCloud.getGameServerProvider().getGameServer(serverName);
             gameServer.setSocket(clientRequest.getSocket());

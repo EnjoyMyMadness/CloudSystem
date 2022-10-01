@@ -16,7 +16,7 @@ public class GameServerInfoRequestPacket extends DataPacket
     
     @Override
     public void handle(final JSONObject jsonObject, final ClientRequest clientRequest) {
-        final boolean isPrivate = (boolean) jsonObject.get("isPrivate");
+        final boolean isPrivate = Boolean.parseBoolean(jsonObject.get("isPrivate").toString());
 
         final GameServerInfoResponsePacket gameServerInfoResponsePacket = new GameServerInfoResponsePacket();
         gameServerInfoResponsePacket.type = 1;
