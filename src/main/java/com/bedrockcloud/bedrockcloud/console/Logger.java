@@ -37,20 +37,16 @@ public class Logger
     }
     
     public void exception(final Exception e) {
-        this.log("§cEXCEPTION", getStackTrace(e.getCause()));
+        if (!getStackTrace(e.getCause()).equals("Can't get stacktrace.")) this.log("§cEXCEPTION", getStackTrace(e.getCause()));
     }
     
     public static String getStackTrace(final Throwable t) {
 
-        if (t == null) return "§cCan't get stacktrace.";
+        if (t == null) return "Can't get stacktrace.";
 
-        try {
-            final StringWriter sw = new StringWriter();
-            t.printStackTrace(new PrintWriter(sw));
-            return sw.toString();
-        } catch (NullPointerException ignored){
-            return "§cCan't get stacktrace.";
-        }
+        final StringWriter sw = new StringWriter();
+        t.printStackTrace(new PrintWriter(sw));
+        return sw.toString();
     }
     
     public void log(final String prefix, final String message) {
