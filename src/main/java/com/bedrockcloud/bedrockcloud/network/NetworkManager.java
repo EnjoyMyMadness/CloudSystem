@@ -27,19 +27,21 @@ public class NetworkManager implements Loggable
     
     public void start() {
         while (true) {
-            try {
-                final Socket socket = this.serverSocket.accept();
+            if (!(this.serverSocket == null) && !this.serverSocket.isClosed()) {
                 try {
-                    socket.setTcpNoDelay(true);
-                } catch (SocketException e){
+                    final Socket socket = this.serverSocket.accept();
+                    try {
+                        socket.setTcpNoDelay(true);
+                    } catch (SocketException e) {
+                        BedrockCloud.getLogger().exception(e);
+                    }
+                    if (socket.isConnected() && !socket.isClosed()) {
+                        ClientRequest request = new ClientRequest(socket);
+                        request.start();
+                    }
+                } catch (IOException e) {
                     BedrockCloud.getLogger().exception(e);
                 }
-                if (socket.isConnected() && !socket.isClosed()) {
-                    ClientRequest request = new ClientRequest(socket);
-                    request.start();
-                }
-            } catch (IOException e) {
-                BedrockCloud.getLogger().exception(e);
             }
         }
     }
