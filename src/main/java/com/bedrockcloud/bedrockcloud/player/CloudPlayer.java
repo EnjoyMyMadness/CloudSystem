@@ -13,7 +13,7 @@ public class CloudPlayer
     private final String currentProxy;
     
     public CloudPlayer(final String playerName, final String address, final String uuid, final String xuid, final String currentServer, final String currentProxy) {
-        this.playerName = playerName;
+        this.playerName = playerName.replace(" ", "_");
         this.address = address;
         this.uuid = uuid;
         this.xuid = xuid;
