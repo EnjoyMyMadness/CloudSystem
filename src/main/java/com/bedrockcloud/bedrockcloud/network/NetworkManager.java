@@ -24,24 +24,28 @@ public class NetworkManager implements Loggable
             BedrockCloud.getLogger().exception(e);
         }
     }
-    
+
+    @SuppressWarnings("InfiniteLoopStatement")
     public void start() {
         while (true) {
             if (!(this.serverSocket == null) && !this.serverSocket.isClosed()) {
                 try {
-                    final Socket socket = this.serverSocket.accept();
+                    Socket clientSocket = this.serverSocket.accept();
                     try {
-                        socket.setTcpNoDelay(true);
+                        clientSocket.setTcpNoDelay(true);
+                        clientSocket.setKeepAlive(true);
                     } catch (SocketException e) {
                         BedrockCloud.getLogger().exception(e);
                     }
-                    if (socket.isConnected() && !socket.isClosed()) {
-                        ClientRequest request = new ClientRequest(socket);
+                    if (clientSocket.isConnected() && !clientSocket.isClosed()) {
+                        ClientRequest request = new ClientRequest(clientSocket);
                         request.start();
                     }
                 } catch (IOException e) {
                     BedrockCloud.getLogger().exception(e);
                 }
+            } else {
+                BedrockCloud.getLogger().warning("§cServerSocket is null or closed.");
             }
         }
     }

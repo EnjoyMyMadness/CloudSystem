@@ -175,7 +175,8 @@ public class BedrockCloud
         getPacketHandler().registerPacket("ListTemplatesRequestPacket", ListTemplatesRequestPacket.class);
         getPacketHandler().registerPacket("ListTemplatesResponsePacket", ListTemplatesResponsePacket.class);
     }
-    
+
+    @SuppressWarnings("unchecked")
     private void startAllProxies() {
         try {
             Thread.sleep(3000L);
@@ -234,7 +235,7 @@ public class BedrockCloud
     public static Config getConfig() {
         return new Config("./local/config.json", 1);
     }
-    
+
     public static Config getTemplateConfig() {
         return new Config("./templates/config.json", 1);
     }
