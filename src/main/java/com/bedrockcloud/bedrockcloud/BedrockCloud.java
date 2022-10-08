@@ -90,7 +90,10 @@ public class BedrockCloud
             BedrockCloud.setRunning(false);
             do {
                 try {
-                    if (BedrockCloud.getSocket() != null && !BedrockCloud.getSocket().isClosed()) BedrockCloud.getSocket().close();
+                    if (BedrockCloud.networkManager.serverSocket != null && !BedrockCloud.networkManager.serverSocket.isClosed()){
+                        BedrockCloud.networkManager.serverSocket.close();
+                        BedrockCloud.getLogger().warning("§cServerSocket was closed.");
+                    }
                 } catch (IOException ignored) {}
 
                 final ProcessBuilder builder = new ProcessBuilder();

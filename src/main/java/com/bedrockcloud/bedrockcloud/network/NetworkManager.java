@@ -27,7 +27,7 @@ public class NetworkManager implements Loggable
 
     @SuppressWarnings("InfiniteLoopStatement")
     public void start() {
-        while (true) {
+        while (BedrockCloud.isRunning()) {
             if (!(this.serverSocket == null) && !this.serverSocket.isClosed()) {
                 try {
                     Socket clientSocket = this.serverSocket.accept();
