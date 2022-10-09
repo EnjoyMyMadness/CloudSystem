@@ -31,8 +31,6 @@ public class GameServerDisconnectPacket extends DataPacket
             final GameServer gameServer = BedrockCloud.getGameServerProvider().getGameServer(serverName);
             gameServer.setAliveChecks(0);
             final Template template = gameServer.getTemplate();
-            BedrockCloud.getLogger().info("Stopped Server " + serverName);
-            BedrockCloud.getLogger().info("Server " + serverName + " removed successful");
             for (final String key : BedrockCloud.getProxyServerProvider().getProxyServerMap().keySet()) {
                 final ProxyServer proxy = BedrockCloud.getProxyServerProvider().getProxyServer(key);
                 final UnregisterServerPacket packet = new UnregisterServerPacket();
@@ -42,6 +40,7 @@ public class GameServerDisconnectPacket extends DataPacket
 
             String notifyMessage = MessageAPI.stoppedMessage.replace("%service", serverName);
             BedrockCloud.sendNotifyCloud(notifyMessage);
+            BedrockCloud.getLogger().warning(notifyMessage);
 
             final ProcessBuilder builder = new ProcessBuilder(new String[0]);
             try {
@@ -79,8 +78,6 @@ public class GameServerDisconnectPacket extends DataPacket
             final PrivateGameServer gameServer = BedrockCloud.getPrivateGameServerProvider().getGameServer(serverName);
             gameServer.setAliveChecks(0);
             final Template template = gameServer.getTemplate();
-            BedrockCloud.getLogger().info("Stopped Server " + serverName);
-            BedrockCloud.getLogger().info("Server " + serverName + " removed successful");
             for (final String key : BedrockCloud.getProxyServerProvider().getProxyServerMap().keySet()) {
                 final ProxyServer proxy = BedrockCloud.getProxyServerProvider().getProxyServer(key);
                 final UnregisterServerPacket packet = new UnregisterServerPacket();
@@ -90,6 +87,7 @@ public class GameServerDisconnectPacket extends DataPacket
 
             String notifyMessage = MessageAPI.stoppedMessage.replace("%service", serverName);
             BedrockCloud.sendNotifyCloud(notifyMessage);
+            BedrockCloud.getLogger().warning(notifyMessage);
 
             final ProcessBuilder builder = new ProcessBuilder(new String[0]);
             try {

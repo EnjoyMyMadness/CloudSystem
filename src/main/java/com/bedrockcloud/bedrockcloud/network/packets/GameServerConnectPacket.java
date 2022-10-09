@@ -24,7 +24,6 @@ public class GameServerConnectPacket extends DataPacket
             gameServer.setAliveChecks(0);
             final VersionInfoPacket versionInfoPacket = new VersionInfoPacket();
             gameServer.pushPacket(versionInfoPacket);
-            BedrockCloud.getLogger().info("Server " + serverName + " started successful");
             for (final String key : BedrockCloud.getProxyServerProvider().getProxyServerMap().keySet()) {
                 final ProxyServer proxy = BedrockCloud.getProxyServerProvider().getProxyServer(key);
                 final RegisterServerPacket packet = new RegisterServerPacket();
@@ -35,6 +34,7 @@ public class GameServerConnectPacket extends DataPacket
 
             String notifyMessage = MessageAPI.startedMessage.replace("%service", serverName);
             BedrockCloud.sendNotifyCloud(notifyMessage);
+            BedrockCloud.getLogger().warning(notifyMessage);
 
             gameServer.getTemplate().addServer(gameServer.getTemplate(), serverName);
         } else {
@@ -44,7 +44,6 @@ public class GameServerConnectPacket extends DataPacket
             gameServer.setAliveChecks(0);
             final VersionInfoPacket versionInfoPacket = new VersionInfoPacket();
             gameServer.pushPacket(versionInfoPacket);
-            BedrockCloud.getLogger().info("Server " + serverName + " started successful");
             for (final String key : BedrockCloud.getProxyServerProvider().getProxyServerMap().keySet()) {
                 final ProxyServer proxy = BedrockCloud.getProxyServerProvider().getProxyServer(key);
                 final RegisterServerPacket packet = new RegisterServerPacket();
@@ -55,6 +54,7 @@ public class GameServerConnectPacket extends DataPacket
 
             String notifyMessage = MessageAPI.startedMessage.replace("%service", serverName);
             BedrockCloud.sendNotifyCloud(notifyMessage);
+            BedrockCloud.getLogger().warning(notifyMessage);
 
             gameServer.getTemplate().addServer(gameServer.getTemplate(), serverName);
 

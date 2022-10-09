@@ -73,10 +73,10 @@ public class PrivateGameServer
         final File server = new File("./temp/" + this.serverName);
         if (server.exists()) {
             final ProcessBuilder builder = new ProcessBuilder(new String[0]);
-            BedrockCloud.getLogger().info("Starting server " + this.serverName);
 
             String notifyMessage = MessageAPI.startMessage.replace("%service", serverName);
             BedrockCloud.sendNotifyCloud(notifyMessage);
+            BedrockCloud.getLogger().warning(notifyMessage);
             try {
                 builder.command("/bin/sh", "-c", "screen -X -S " + this.serverName + " kill").start();
             } catch (Exception e) {
@@ -89,7 +89,9 @@ public class PrivateGameServer
                 BedrockCloud.getLogger().exception(e);
             }
         } else {
-            BedrockCloud.getLogger().error("Server start failed :(");
+            String notifyMessage = MessageAPI.startFailed.replace("%service", serverName);
+            BedrockCloud.sendNotifyCloud(notifyMessage);
+            BedrockCloud.getLogger().warning(notifyMessage);
         }
     }
     
@@ -117,10 +119,9 @@ public class PrivateGameServer
     }
     
     public void stopServer() {
-        BedrockCloud.getLogger().info("Server " + this.serverName + " stopping...");
-
         String notifyMessage = MessageAPI.stopMessage.replace("%service", this.serverName);
         BedrockCloud.sendNotifyCloud(notifyMessage);
+        BedrockCloud.getLogger().warning(notifyMessage);
 
         final GameServerDisconnectPacket packet = new GameServerDisconnectPacket();
         packet.addValue("reason", "Server Stopped");

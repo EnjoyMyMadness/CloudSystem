@@ -13,7 +13,7 @@ import com.bedrockcloud.bedrockcloud.console.Loggable;
 public class NetworkManager implements Loggable
 {
     public ServerSocket serverSocket;
-    public Map<String, Socket> channelList;
+    public HashMap<String, Socket> channelList;
     
     public NetworkManager(final int port) {
         try {

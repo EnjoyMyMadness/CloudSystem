@@ -72,7 +72,7 @@ public class ProxyServer
                 try {
                     s.close();
                 } catch (IOException e) {
-                    throw new RuntimeException("You should handle this error.", e);
+                    BedrockCloud.getLogger().exception(e);
                 }
             }
         }
@@ -85,6 +85,7 @@ public class ProxyServer
 
             String notifyMessage = MessageAPI.startMessage.replace("%service", serverName);
             BedrockCloud.sendNotifyCloud(notifyMessage);
+            BedrockCloud.getLogger().warning(notifyMessage);
 
             try {
                 builder.command("/bin/sh", "-c", "screen -X -S " + this.serverName + " kill").start();
@@ -97,16 +98,17 @@ public class ProxyServer
             } catch (Exception e) {
                 BedrockCloud.getLogger().exception(e);
             }
-        }
-        else {
-            BedrockCloud.getLogger().error("Server start failed.");
+        } else {
+            String notifyMessage = MessageAPI.startFailed.replace("%service", serverName);
+            BedrockCloud.sendNotifyCloud(notifyMessage);
+            BedrockCloud.getLogger().warning(notifyMessage);
         }
     }
     
     public void stopServer() {
-
         String notifyMessage = MessageAPI.stopMessage.replace("%service", this.serverName);
         BedrockCloud.sendNotifyCloud(notifyMessage);
+        BedrockCloud.getLogger().warning(notifyMessage);
 
         final ProxyServerDisconnectPacket packet = new ProxyServerDisconnectPacket();
         packet.addValue("reason", "Proxy Stopped");

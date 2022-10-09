@@ -86,38 +86,6 @@ public class BedrockCloud
         ttime.schedule(new KeepALiveTask(), 1000L, 1000L);
         ttime.schedule(new PrivateKeepALiveTask(), 1000L, 1000L);
 
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            BedrockCloud.setRunning(false);
-            do {
-                try {
-                    if (BedrockCloud.networkManager.serverSocket != null && !BedrockCloud.networkManager.serverSocket.isClosed()){
-                        BedrockCloud.networkManager.serverSocket.close();
-                        BedrockCloud.getLogger().warning("§cServerSocket was closed.");
-                    }
-                } catch (IOException ignored) {}
-
-                final ProcessBuilder builder = new ProcessBuilder();
-                try {
-
-                    for (final String templateName : BedrockCloud.getTemplateProvider().templateMap.keySet()) {
-                        BedrockCloud.getTemplateProvider().removeRunningGroup(templateName);
-                    }
-                    for (final GameServer gameServer : BedrockCloud.getGameServerProvider().gameServerMap.values()) {
-                        gameServer.stopServer();
-                    }
-
-                    for (final String proxy : BedrockCloud.getProxyServerProvider().proxyServerMap.keySet()) {
-                        final ProxyServer proxyServer = BedrockCloud.getProxyServerProvider().getProxyServer(proxy);
-                        proxyServer.stopServer();
-                    }
-
-                    builder.command("/bin/sh", "-c", "killall -9 php").start();
-                    builder.command("/bin/sh", "-c", "killall -9 java").start(); //INFO: This is needed to fix that not all services were stopped
-                } catch (IOException e) {
-                    BedrockCloud.getLogger().exception(e);
-                }
-            } while (!BedrockCloud.isRunning());
-        }));
         this.startAllProxies();
         BedrockCloud.networkManager.start();
     }

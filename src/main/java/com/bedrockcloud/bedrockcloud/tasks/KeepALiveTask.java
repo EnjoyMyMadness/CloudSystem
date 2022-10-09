@@ -58,8 +58,8 @@ public class KeepALiveTask extends TimerTask {
                                 gameServer.setAliveChecks(0);
 
                                 String notifyMessage = MessageAPI.timedOut.replace("%service", servername);
-                                BedrockCloud.getLogger().warning(notifyMessage);
                                 BedrockCloud.sendNotifyCloud(notifyMessage);
+                                BedrockCloud.getLogger().warning(notifyMessage);
 
                                 final ProcessBuilder builder = new ProcessBuilder();
                                 try {
