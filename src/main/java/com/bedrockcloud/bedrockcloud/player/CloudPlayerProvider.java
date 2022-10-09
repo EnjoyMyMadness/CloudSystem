@@ -5,13 +5,13 @@ import java.util.Map;
 
 public class CloudPlayerProvider
 {
-    public Map<String, CloudPlayer> cloudPlayerMap;
+    public HashMap<String, CloudPlayer> cloudPlayerMap;
     
     public CloudPlayerProvider() {
         this.cloudPlayerMap = new HashMap<String, CloudPlayer>();
     }
     
-    public Map<String, CloudPlayer> getCloudPlayerMap() {
+    public HashMap<String, CloudPlayer> getCloudPlayerMap() {
         return this.cloudPlayerMap;
     }
     
@@ -32,6 +32,6 @@ public class CloudPlayerProvider
     }
     
     public boolean existsPlayer(final String playerName) {
-        return this.cloudPlayerMap.get(playerName.toLowerCase()) != null;
+        return this.cloudPlayerMap.containsKey(playerName.toLowerCase());
     }
 }

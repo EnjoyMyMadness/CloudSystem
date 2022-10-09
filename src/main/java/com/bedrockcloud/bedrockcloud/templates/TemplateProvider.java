@@ -10,19 +10,19 @@ import java.util.Map;
 
 public class TemplateProvider implements Loggable
 {
-    public Map<String, Template> templateMap;
-    public Map<String, Template> runningTemplates;
+    public HashMap<String, Template> templateMap;
+    public HashMap<String, Template> runningTemplates;
     
     public TemplateProvider() {
         this.templateMap = new HashMap<String, Template>();
         this.runningTemplates = new HashMap<String, Template>();
     }
     
-    public Map<String, Template> getRunningTemplates() {
+    public HashMap<String, Template> getRunningTemplates() {
         return this.runningTemplates;
     }
     
-    public Map<String, Template> getTemplateMap() {
+    public HashMap<String, Template> getTemplateMap() {
         return this.templateMap;
     }
     
@@ -47,7 +47,7 @@ public class TemplateProvider implements Loggable
     }
     
     public boolean isTemplateRunning(final Template template) {
-        return this.runningTemplates.get(template.getName()) != null;
+        return this.runningTemplates.containsKey(template.getName());
     }
     
     public void addRunningTemplate(final Template template) {
@@ -55,15 +55,11 @@ public class TemplateProvider implements Loggable
     }
     
     public void removeRunningGroup(final String name) {
-        if (this.runningTemplates.get(name) != null) {
-            this.runningTemplates.remove(name);
-        }
+        this.runningTemplates.remove(name);
     }
     
     public void removeRunningGroup(final Template group) {
-        if (this.runningTemplates.get(group.getName()) != null) {
-            this.runningTemplates.remove(group.getName());
-        }
+        this.runningTemplates.remove(group.getName());
     }
     
     public void onLoad() {
@@ -71,8 +67,7 @@ public class TemplateProvider implements Loggable
             try {
                 final HashMap<String, Object> stats = (HashMap<String, Object>) json.get(name, 9);
                 new Template(name, Math.toIntExact((Long) stats.get("minRunningServer")), Math.toIntExact((Long) stats.get("maxRunningServer")), Math.toIntExact((Long) stats.get("maxPlayer")), Math.toIntExact((Long) stats.get("type")), (Boolean) stats.get("beta"), (Boolean) stats.get("maintenance"), (Boolean) stats.get("isLobby"), (Boolean) stats.get("canBePrivate"));
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }

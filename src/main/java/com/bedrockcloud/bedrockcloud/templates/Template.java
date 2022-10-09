@@ -21,8 +21,8 @@ public class Template implements Loggable
     public final Boolean isMaintenance;
     public final Boolean isLobby;
     public final Boolean canBePrivate;
-    public Map<String, Template> runningTemplateServers;
-    public Map<String, String> templatePlayer;
+    public HashMap<String, Template> runningTemplateServers;
+    public HashMap<String, String> templatePlayer;
     
     public Template(final String name, final Integer minRunningServer, final Integer maxRunningServer, final Integer maxPlayers, final Integer type, final Boolean isBeta, final Boolean isMaintenance, final Boolean isLobby, final Boolean canBePrivate) {
         this.name = name;
@@ -41,7 +41,7 @@ public class Template implements Loggable
         this.templatePlayer = new HashMap<String, String>();
     }
 
-    public Map<String, Template> getRunningTemplateServers() {
+    public HashMap<String, Template> getRunningTemplateServers() {
         return this.runningTemplateServers;
     }
 
@@ -57,7 +57,7 @@ public class Template implements Loggable
         return canBePrivate;
     }
 
-    public Map<String, String> getTemplatePlayers() {
+    public HashMap<String, String> getTemplatePlayers() {
         return this.templatePlayer;
     }
 
