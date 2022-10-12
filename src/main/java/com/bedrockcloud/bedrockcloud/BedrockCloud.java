@@ -63,6 +63,7 @@ public class BedrockCloud
 
     public BedrockCloud() {
         running = true;
+        Runtime.getRuntime().addShutdownHook(new ShutdownThread());
 
         System.setProperty("java.net.preferIPv4Stack" , "true");
 
@@ -89,8 +90,6 @@ public class BedrockCloud
 
         this.startAllProxies();
         BedrockCloud.networkManager.start();
-
-        Runtime.getRuntime().addShutdownHook(new ShutdownThread());
     }
 
     public static boolean isRunning() {
@@ -283,10 +282,7 @@ public class BedrockCloud
         return Integer.parseInt(version);
     }
 
-    @SuppressWarnings("InfiniteLoopStatement")
     public static void shutdown(){
-        boolean allServicesStopped = false;
-
         try {
             if (BedrockCloud.networkManager.serverSocket != null && !BedrockCloud.networkManager.serverSocket.isClosed()){
                 BedrockCloud.networkManager.serverSocket.close();
@@ -306,27 +302,12 @@ public class BedrockCloud
             final ProxyServer proxyServer = BedrockCloud.getProxyServerProvider().getProxyServer(proxy);
             proxyServer.stopServer();
         }
-
-        int gameServerCount = BedrockCloud.getGameServerProvider().gameServerMap.size();
-        int privateServerCount = BedrockCloud.getPrivateGameServerProvider().gameServerMap.size();
-        int proxyServerCount = BedrockCloud.getProxyServerProvider().proxyServerMap.size();
-
-        if (gameServerCount <= 0 && privateServerCount <= 0 && proxyServerCount <= 0){
-            allServicesStopped = true;
-            BedrockCloud.getLogger().info("§aAll services were stopped.");
-        }
-
-        while (true){
-            final ProcessBuilder builder = new ProcessBuilder();
-            try {
-                if (allServicesStopped) {
-                    Thread.sleep(2000);
-                    builder.command("/bin/sh", "-c", "killall -9 php").start();
-                    builder.command("/bin/sh", "-c", "killall -9 java").start();
-                }
-            } catch (IOException | InterruptedException e) {
-                BedrockCloud.getLogger().exception(e);
-            }
+        final ProcessBuilder builder = new ProcessBuilder();
+        try {
+                builder.command("/bin/sh", "-c", "killall -9 php").start();
+                builder.command("/bin/sh", "-c", "killall -9 java").start();
+        } catch (IOException e) {
+            BedrockCloud.getLogger().exception(e);
         }
     }
 }

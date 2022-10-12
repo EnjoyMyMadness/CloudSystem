@@ -29,7 +29,6 @@ com\bedrockcloud\bedrockcloud\network\packets\GameServerInfoRequestPacket.class
 com\bedrockcloud\bedrockcloud\api\MessageAPI.class
 com\bedrockcloud\bedrockcloud\command\defaults\InfoCommand.class
 com\bedrockcloud\bedrockcloud\network\packets\StartPrivateServerPacket.class
-com\bedrockcloud\bedrockcloud\ClassNotFound.class
 com\bedrockcloud\bedrockcloud\serverQuery\api\Status$Version.class
 com\bedrockcloud\bedrockcloud\command\CommandManager.class
 com\bedrockcloud\bedrockcloud\network\packets\RegisterServerPacket.class
@@ -52,6 +51,7 @@ com\bedrockcloud\bedrockcloud\server\gameserver\GameServerProvider.class
 com\bedrockcloud\bedrockcloud\serverQuery\api\Status$Players$Player.class
 com\bedrockcloud\bedrockcloud\serverQuery\api\QueryStatus.class
 com\bedrockcloud\bedrockcloud\tasks\RestartAllTask.class
+com\bedrockcloud\bedrockcloud\console\shutdown\ShutdownThread.class
 com\bedrockcloud\bedrockcloud\command\defaults\EndCommand.class
 com\bedrockcloud\bedrockcloud\SoftwareManager.class
 com\bedrockcloud\bedrockcloud\command\defaults\ServerCommand.class
@@ -67,9 +67,9 @@ com\bedrockcloud\bedrockcloud\serverQuery\internal\ServerDNS.class
 com\bedrockcloud\bedrockcloud\network\packets\GameServerDisconnectPacket.class
 com\bedrockcloud\bedrockcloud\templates\TemplateProvider.class
 com\bedrockcloud\bedrockcloud\serverQuery\api\Status$Mods.class
-com\bedrockcloud\bedrockcloud\network\packets\CheckCloudPlayerRequestPacket.class
 com\bedrockcloud\bedrockcloud\network\packets\StopServerPacket.class
 com\bedrockcloud\bedrockcloud\network\packets\CloudNotifyMessagePacket.class
+com\bedrockcloud\bedrockcloud\CloudStarter.class
 com\bedrockcloud\bedrockcloud\tasks\PrivateKeepALiveTask.class
 com\bedrockcloud\bedrockcloud\files\Startfiles.class
 com\bedrockcloud\bedrockcloud\network\packets\SendToHubPacket.class
