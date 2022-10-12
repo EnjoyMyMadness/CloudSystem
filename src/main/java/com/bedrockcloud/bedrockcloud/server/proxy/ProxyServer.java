@@ -23,11 +23,13 @@ public class ProxyServer
     private Socket socket;
     public final String temp_path = "./templates/";
     public final String servers_path = "./temp/";
+    public int pid;
     
     public ProxyServer(final Template template) {
         this.template = template;
         this.serverName = template.getName() + "-" + BedrockCloud.getGameServerProvider().getFreeNumber("./temp/" + template.getName());
         this.serverPort = PortValidator.getNextProxyServerPort(this);
+        this.pid = -1;
         BedrockCloud.getProxyServerProvider().addProxyServer(this);
         this.copyServer();
         try {
@@ -113,6 +115,18 @@ public class ProxyServer
         final ProxyServerDisconnectPacket packet = new ProxyServerDisconnectPacket();
         packet.addValue("reason", "Proxy Stopped");
         this.pushPacket(packet);
+    }
+
+    public void killWithPID() throws IOException {
+        final ProcessBuilder builder = new ProcessBuilder();
+        try {
+            builder.command("/bin/sh", "-c", "screen -X -S " + this.serverName + " kill").start();
+        } catch (Exception ignored) {
+        }
+        try {
+            builder.command("/bin/sh", "-c", "kill " + this.pid).start();
+        } catch (Exception ignored) {
+        }
     }
 
     public void pushPacket(final DataPacket cloudPacket) {

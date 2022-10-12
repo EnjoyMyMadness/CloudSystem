@@ -22,10 +22,12 @@ public class ProxyServerConnectPacket extends DataPacket implements Loggable
     @Override
     public void handle(final JSONObject jsonObject, final ClientRequest clientRequest) {
         final String serverName = jsonObject.get("serverName").toString();
+        final String pid = jsonObject.get("proxyPid").toString();
 
         this.getLogger().info("Proxy '" + serverName + "' is registered!");
 
         final ProxyServer proxyServer = BedrockCloud.getProxyServerProvider().getProxyServer(serverName);
+        proxyServer.pid = Integer.parseInt(pid);
         final Object socketPort = jsonObject.get("socketPort");
         try {
             final Socket s = new Socket("127.0.0.1", Integer.parseInt(socketPort.toString()));

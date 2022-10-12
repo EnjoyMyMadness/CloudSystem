@@ -5,6 +5,7 @@ import com.bedrockcloud.bedrockcloud.console.shutdown.ShutdownThread;
 import com.bedrockcloud.bedrockcloud.network.packets.*;
 import com.bedrockcloud.bedrockcloud.player.CloudPlayerProvider;
 import com.bedrockcloud.bedrockcloud.config.Config;
+import com.bedrockcloud.bedrockcloud.server.privategameserver.PrivateGameServer;
 import com.bedrockcloud.bedrockcloud.server.privategameserver.PrivateGameServerProvider;
 import com.bedrockcloud.bedrockcloud.tasks.KeepALiveTask;
 import com.bedrockcloud.bedrockcloud.tasks.PrivateKeepALiveTask;
@@ -296,11 +297,24 @@ public class BedrockCloud
 
         for (final GameServer gameServer : BedrockCloud.getGameServerProvider().gameServerMap.values()) {
             gameServer.stopServer();
+            try {
+                gameServer.killWithPID();
+            } catch (IOException ignored) {}
+        }
+
+        for (final PrivateGameServer gameServer : BedrockCloud.getPrivateGameServerProvider().gameServerMap.values()) {
+            gameServer.stopServer();
+            try {
+                gameServer.killWithPID();
+            } catch (IOException ignored) {}
         }
 
         for (final String proxy : BedrockCloud.getProxyServerProvider().proxyServerMap.keySet()) {
             final ProxyServer proxyServer = BedrockCloud.getProxyServerProvider().getProxyServer(proxy);
             proxyServer.stopServer();
+            try {
+                proxyServer.killWithPID();
+            } catch (IOException ignored) {}
         }
         final ProcessBuilder builder = new ProcessBuilder();
         try {

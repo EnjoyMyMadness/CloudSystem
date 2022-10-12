@@ -125,6 +125,18 @@ public class GameServer
         this.pushPacket(packet);
     }
 
+    public void killWithPID() throws IOException {
+        final ProcessBuilder builder = new ProcessBuilder();
+        try {
+            builder.command("/bin/sh", "-c", "screen -X -S " + this.serverName + " kill").start();
+        } catch (Exception ignored) {
+        }
+        try {
+            builder.command("/bin/sh", "-c", "kill " + this.pid).start();
+        } catch (Exception ignored) {
+        }
+    }
+
     public Socket getSocket() {
         return this.socket;
     }
