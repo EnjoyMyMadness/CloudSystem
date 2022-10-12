@@ -135,7 +135,6 @@ public class BedrockCloud
                         BedrockCloud.getLogger().exception(e);
                     }
                 } while (!BedrockCloud.isRunning());
-            });
             }
         });
     }
