@@ -91,6 +91,7 @@ public class BedrockCloud
 
         Runtime.getRuntime().addShutdownHook(new Thread() {
             @Override
+            @SuppressWarnings("InfiniteLoopStatement")
             public void run() {
                 BedrockCloud.setRunning(false);
                 boolean allServicesStopped = false;
@@ -134,7 +135,7 @@ public class BedrockCloud
                     } catch (IOException | InterruptedException e) {
                         BedrockCloud.getLogger().exception(e);
                     }
-                } while (!BedrockCloud.isRunning());
+                } while (true);
             }
         });
     }
