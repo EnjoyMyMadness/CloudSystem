@@ -19,7 +19,7 @@ public class PlayerCommand extends Command
             if (args[0].equalsIgnoreCase("list")) {
                 this.getLogger().info("§e»§r §7There are currently " + BedrockCloud.getCloudPlayerProvider().cloudPlayerMap.size() + " Player connected! §e«");
                 for (final CloudPlayer cloudPlayer : BedrockCloud.getCloudPlayerProvider().cloudPlayerMap.values()) {
-                    this.getLogger().info("§c\u27a4 §rPlayer: " + cloudPlayer.getPlayerName() + " (" + cloudPlayer.getAddress() + ") | (" + cloudPlayer.getXuid() + ") \u1405 " + cloudPlayer.getCurrentServer());
+                    this.getLogger().info("§c➤ §rPlayer: " + cloudPlayer.getPlayerName() + " (" + cloudPlayer.getAddress() + ") | (" + cloudPlayer.getXuid() + ") ᐅ " + cloudPlayer.getCurrentServer());
                 }
             } else if (args[0].equalsIgnoreCase("message") && args.length != 2) {
                 final String value = args[1];

@@ -22,13 +22,13 @@ public class ServerCommand extends Command
                 int services = BedrockCloud.getGameServerProvider().getGameServerMap().size() + BedrockCloud.getPrivateGameServerProvider().getGameServerMap().size() + BedrockCloud.getProxyServerProvider().getProxyServerMap().size();
                 this.getLogger().info("§e»§r §7There are currently " + services + " Services online! §e«");
                 for (final GameServer gameServer : BedrockCloud.getGameServerProvider().gameServerMap.values()) {
-                    this.getLogger().info("§c\u27a4 §rGameServer: " + gameServer.getServerName() + " | Players: " + gameServer.getPlayerCount() + " \u1405 " + gameServer.getTemplate().getName());
+                    this.getLogger().info("§c➤ §rGameServer: " + gameServer.getServerName() + " | Players: " + gameServer.getPlayerCount() + " ᐅ " + gameServer.getTemplate().getName());
                 }
                 for (final PrivateGameServer privateGameServer : BedrockCloud.getPrivateGameServerProvider().gameServerMap.values()) {
-                    this.getLogger().info("§c\u27a4 §rPrivateGameServer: " + privateGameServer.getServerName() + " | Players: " + privateGameServer.getPlayerCount() + " \u1405 " + privateGameServer.getTemplate().getName());
+                    this.getLogger().info("§c➤ §rPrivateGameServer: " + privateGameServer.getServerName() + " | Players: " + privateGameServer.getPlayerCount() + " ᐅ " + privateGameServer.getTemplate().getName());
                 }
                 for (final ProxyServer proxyServer : BedrockCloud.getProxyServerProvider().proxyServerMap.values()) {
-                    this.getLogger().info("§c\u27a4 §rProxyServer: " + proxyServer.getServerName() + " | Template: " + proxyServer.getTemplate().getName());
+                    this.getLogger().info("§c➤ §rProxyServer: " + proxyServer.getServerName() + " | Template: " + proxyServer.getTemplate().getName());
                 }
             } else if (args.length > 1) {
                 if (args[0].equalsIgnoreCase("start")) {
