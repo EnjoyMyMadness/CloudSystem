@@ -1,5 +1,7 @@
 package com.bedrockcloud.bedrockcloud.console;
 
+import com.bedrockcloud.bedrockcloud.BedrockCloud;
+
 import java.io.*;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
@@ -50,6 +52,7 @@ public class Logger
         final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         System.out.println(Colors.toColor("§7[§b" + dateTime.format(dateTimeFormatter) + "§7] " + "§7[§r" + prefix + "§7]§r §8» §r" + message + "§r"));
         try {
+            if (!BedrockCloud.getConfig().getBoolean("enable-cloudlog-file")) return;
             FileWriter cloudLogWriter;
             (cloudLogWriter = new FileWriter(this.cloudLog, true)).append(Colors.removeColor("§7[§b" + dateTime.format(dateTimeFormatter) + "§7] " + "§7[§r" + prefix + "§7]§r §8» §r" + message + "§r")).append("\n");
             cloudLogWriter.flush();

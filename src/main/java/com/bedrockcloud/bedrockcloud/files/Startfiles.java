@@ -91,12 +91,12 @@ public class Startfiles implements Loggable
             final File file = new File("./local/config.json");
             if (!file.exists()) {
                 final Config config = new Config(file, 1);
-                config.set("password", "PASSWORD_HERE");
                 config.set("port", 32323.0);
                 config.set("debug-mode", false);
                 config.set("motd", "Default BedrockCloud service");
                 config.set("auto-update-on-start", false);
                 config.set("wdpe-login-extras", false);
+                config.set("enable-cloudlog-file", false);
                 config.save(file);
                 this.getLogger().debug("Check the server versions...");
                 if (SoftwareManager.download("https://github.com/pmmp/PocketMine-MP/releases/latest/download/PocketMine-MP.phar", "./local/versions/pocketmine/PocketMine-MP.phar")) {
