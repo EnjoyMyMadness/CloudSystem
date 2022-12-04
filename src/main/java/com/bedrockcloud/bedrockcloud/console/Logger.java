@@ -1,12 +1,8 @@
 package com.bedrockcloud.bedrockcloud.console;
 
-import java.io.IOException;
+import java.io.*;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.io.FileWriter;
-import java.io.File;
 
 public class Logger
 {
@@ -57,8 +53,6 @@ public class Logger
             FileWriter cloudLogWriter;
             (cloudLogWriter = new FileWriter(this.cloudLog, true)).append(Colors.removeColor("§7[§b" + dateTime.format(dateTimeFormatter) + "§7] " + "§7[§r" + prefix + "§7]§r §8» §r" + message + "§r")).append("\n");
             cloudLogWriter.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        } catch (IOException ignored) {}
     }
 }
